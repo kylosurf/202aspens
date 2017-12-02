@@ -11,10 +11,10 @@ class Weather extends Component {
   }
 
   componentWillMount() {
-    axios.get("https://api.darksky.net/forecast/512cb51de02d6b18f1080d793848841d/50.1158752,-122.9450087").then((response)=>{
-      console.log(response.data)
+    axios("https://api.darksky.net/forecast/512cb51de02d6b18f1080d793848841d/50.1158752,-122.9450087").then(({data}) => {
+      console.log(data)
       this.setState({
-        weatherData: response.data
+        weatherData: data
       })
     })
   }
@@ -22,26 +22,47 @@ class Weather extends Component {
 
   render(){
     if(Object.keys(this.state.weatherData).length === 0) {
-      return (
-        <div>Loading...</div>
-      )
+      return  <div>Loading...</div>
     } else {
-      return(
-        <div className="container">
-          <div className="row">
-          <div className="col-xs-12">
-            <h2>Whistler Balckcomb Weather Report</h2>
-          </div>
-          </div>
-            <h3>Snowfall Report</h3>
-            <div>{this.state.weatherData.daily.summary}</div>
-            <h3>Current Tempurature</h3>
-            <div>{this.state.weatherData.currently.apparentTemperature}</div>
-            <h3>Hourly</h3>
-            <div>{this.state.weatherData.hourly.summary}</div>
-          </div>
-      )
+      return<div className="container">
 
+          <div className="weather">
+
+              <div className="row">
+              <div className="container col-sm-12 col-md-12">
+
+
+              <table class="table table-striped table-inverse">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><h4><strong>Snowfall Report</strong></h4>
+                    <div>{this.state.weatherData.daily.summary}</div></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><h4><strong>Hourly</strong></h4>
+                    <div>{this.state.weatherData.hourly.summary}</div></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"></th>
+                    <td><h4><strong>Current Tempurature</strong></h4>
+                    <div>{this.state.weatherData.currently.apparentTemperature}</div></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"></th>
+                    <h4><strong>Wind Speed</strong></h4>
+                    <div>{this.state.weatherData.currently.windSpeed}</div>
+                  </tr>
+                </tbody>
+              </table>
+
+</div>
+</div>
+            </div>
+        </div>
     }
   }
 
@@ -49,5 +70,3 @@ class Weather extends Component {
 
 
 export default Weather;
-
-

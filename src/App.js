@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Weather from './Components/Weather';
+import Carousel from './Components/Carousel';
 import './App.css';
 
 class App extends Component {
@@ -19,36 +20,64 @@ class App extends Component {
 
         //Get the Listing
 
-      
-      axios.get("https://ws.homeaway.com/public/listingReviews?listingId=869826&unitId=1213354").then((response) => {
-          console.log(response.data)
+
+      axios("https://ws.homeaway.com/public/search?listingId=869826").then(({data}) => {
+          console.log(data)
         })
 
-      axios.get("https://ws.homeaway.com/public/listing?id=869826&q=AVAILABILITY&q=DETAILS&q=PHOTOS").then((response) => {
-        console.log(response.data)
+      axios.get("https://ws.homeaway.com/public/listingReviews?listingId=869826&unitId=1417765&q=AVAILABILITY&q=DETAILS&q=PHOTOS").then(({data}) => {
+        console.log(data)
        })
     })
   }
-  
+
 
   render() {
     return (
-      <div className="container">
+    <div>
+      <div className="header">
+        <img src="WhistlerBlackcomb_Logo.png" style={{width:"20%"}} />
+        <h6>202-4800 Spearhead Dr Blackcomb Mountain V0N 1B4</h6>
+      </div>
 
-        <div className="weather App">
-        
+
           <div className="row">
             <div className="col-xs-12">
-              <header className="App">Welcome to 202</header>
              </div>
           </div>
-        </div>
+
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item" width='100%' height='80%'
+          <iframe className="jumbotron"
           src='https://my.matterport.com/show/?m=6dkaZfYhjbc' frameborder='0' allowFullScreen></iframe>
       </div>
+      <div></div>
+
+      <div className="container">
+          <div className="property">
+
+            <div className="row">
+            <div className="container col-sm-12 col-md-12">
+
+            <div className="center-block">
+
+              <h1>Live the Whistler life!!</h1>
+
+                <p>
+                  Surrounded by breathtaking scener!! Located on the slope of North America's top ski and snowboard resort with a peak elevation of <strong>2,240m</strong> providing the longest vertical ride. Whistler/Blackcomb can be enjoyed year round, boasting unbelievable skiing and snowboarding, four championship golf course with access to the <strong>BEST</strong> apres spots, mountain bike trails, hiking trails, glacier fed lakes and spring fed spas.
+                </p>
+            </div>
+
+            </div>
+            </div>
+          </div>
+      </div>
+
+      <div>
         <Weather />
-    </div>
+        <Carousel />
+      </div>
+
+      </div>
     );
   }
 }
